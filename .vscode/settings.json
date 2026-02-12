@@ -1,0 +1,11 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "projeto-node-sequelize-sqlite",
+            "database": "./database.sqlite"
+        }
+    ]
+}
