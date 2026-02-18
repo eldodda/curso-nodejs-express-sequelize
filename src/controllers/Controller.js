@@ -1,30 +1,49 @@
-const Services = require('../services/Services.js');
+const convertIds = require('../utils/conversorDeStringHelper.js');
 
 class Controller {
-  constructor(entidadeService){
+  constructor(entidadeService) {
     this.entidadeService = entidadeService;
   }
 
-  async pegaTodos(req, res){
+  async pegaTodos(req, res) {
     try {
       const listaDeRegistro = await this.entidadeService.pegaTodosOsRegistros();
       return res
         .status(200)
         .json(listaDeRegistro);
-    } catch (erro){
-    // erro
+    } catch (erro) {
+      return res
+        .status(500)
+        .json({ erro: erro.message });
     }
   }
 
-  async pegaUmPorId(req, res){
-    const {id} = req.params;
+  async pegaUmPorId(req, res) {
+    const { id } = req.params;
     try {
       const umRegistro = await this.entidadeService.pegaUmRegistroPorId(Number(id));
       return res
         .status(200)
         .json(umRegistro);
-    } catch(erro) {
-      //  erro
+    } catch (erro) {
+      return res
+        .status(500)
+        .json({ erro: erro.message });
+    }
+  }
+
+  async pegaUm(req, res) {
+    const { ...params } = req.params;
+    const where = convertIds(params);
+    try {
+      const umRegistro = await this.entidadeService.pegaUmRegistro(where);
+      return res
+        .status(200)
+        .json(umRegistro);
+    } catch (erro) {
+      return res
+        .status(500)
+        .json({ erro: erro.message });
     }
   }
 
@@ -36,37 +55,44 @@ class Controller {
         .status(200)
         .json(novoRegistroCriado);
     } catch (erro) {
-      //  erro
+      return res
+        .status(500)
+        .json({ erro: erro.message });
     }
   }
 
   async atualiza(req, res) {
-    const {id} = req.params;
+    const { ...params } = req.params;
     const dadosAtualizados = req.body;
+    const where = convertIds(params);
     try {
-      const foiAtualizado = await this.entidadeService.atualizaRegistro(dadosAtualizados, Number(id));
+      const foiAtualizado = await this.entidadeService.atualizaRegistro(dadosAtualizados, where);
       if (!foiAtualizado) {
         return res
           .status(400)
-          .json({mensagem: 'Registro não foi atualizado'});
+          .json({ mensagem: 'Registro não foi atualizado' });
       }
       return res
         .status(200)
-        .json({mensagem: 'atualizado com sucesso'});
+        .json({ mensagem: 'atualizado com sucesso' });
     } catch (erro) {
-      //erro
+      return res
+        .status(500)
+        .json({ erro: erro.message });
     }
   }
 
-  async exclui(req, res){
-    const {id} = req.params;
+  async exclui(req, res) {
+    const { id } = req.params;
     try {
       await this.entidadeService.excluiRegistro(Number(id));
       return res
         .status(200)
-        .json({mensagem: `id ${id} deletado`});
+        .json({ mensagem: `id ${id} deletado` });
     } catch (erro) {
-      //erro
+      return res
+        .status(500)
+        .json({ erro: erro.message });
     }
   }
 }

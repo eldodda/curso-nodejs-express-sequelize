@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('pessoas', [
       {
         nome: 'Solange Estudante',
@@ -11,7 +11,7 @@ module.exports = {
         ativo: true,
         role: 'estudante',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         nome: 'Igor Estudante',
@@ -20,7 +20,7 @@ module.exports = {
         ativo: true,
         role: 'estudante',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         nome: 'Aline Estudante',
@@ -29,7 +29,7 @@ module.exports = {
         ativo: true,
         role: 'estudante',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         nome: 'Fernando Estudante',
@@ -38,7 +38,16 @@ module.exports = {
         ativo: true,
         role: 'estudante',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+      },
+      {
+        nome: 'Roberta Estudante',
+        email: 'roberta@email.com',
+        cpf: '77915012010',
+        ativo: false,
+        role: 'estudante',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         nome: 'Ricardo Docente',
@@ -47,7 +56,7 @@ module.exports = {
         ativo: true,
         role: 'docente',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         nome: 'Dine Docente',
@@ -56,13 +65,21 @@ module.exports = {
         ativo: true,
         role: 'docente',
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
-    ],
-    {});
+        updatedAt: new Date(),
+      },
+      {
+        nome: 'Marina Docente',
+        email: 'marina@email.com',
+        cpf: '17517762044',
+        ativo: false,
+        role: 'docente',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ], {});
   },
 
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     await queryInterface.bulkDelete('pessoas', null, {});
   }
 };

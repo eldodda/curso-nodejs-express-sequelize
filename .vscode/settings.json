@@ -4,8 +4,8 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "name": "projeto-node-sequelize-sqlite",
-            "database": "./database.sqlite"
+            "database": ".\\src\\database\\storage\\database.sqlite",
+            "name": "projeto-nodejs-sqlite-sequelize"
         }
     ]
 }
